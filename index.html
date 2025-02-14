@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>ดอกกุหลาบของพี่หยก</title>	
+<link rel="icon" type="image/jpeg" href="OIP.png">
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -42,6 +43,22 @@
 </div>
 <div class="click-counter">
     <span id="counter">0</span>
+    <span class="counter-text">จำนวนครั้งที่กดดอกกุหลาบ</span>
+</div>
+<div class="title-container">
+    <h1 class="main-title">ดอกกุหลาบสำหรับพี่หยก</h1>
+    <p class="subtitle">ความปรารถนาและความโชคดีจะขึ้นตามที่ดอกกุหลาบหลุด ลองกดดูสิครับ</p>
+</div>
+<a href="secret.html" class="secret-button">ปุ่มลับ</a>
+<div id="warningModal" class="modal">
+    <div class="modal-content">
+        <h2>⚠️ คำเตือน ⚠️</h2>
+        <p>ไม่แนะนำให้กดไปต่อเด็ดขาด เพราะ มันไร้สาระมาก แต่ถ้าอยากรู้ว่าคืออะไรก็ลองดู แต่ผมเตือนแล้วนะ</p>
+        <div class="modal-buttons">
+            <button class="cancel-btn" onclick="closeModal()">ไม่ดูก็ได้...</button>
+            <button class="confirm-btn" onclick="goToSecret()">ก็จะดูจะทำไม</button>
+        </div>
+    </div>
 </div>
 <script src="script.js"></script>
 </body>
