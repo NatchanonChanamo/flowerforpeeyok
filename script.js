@@ -15,7 +15,33 @@ const messages = [
     "พี่หยกสวยจริงจัง"
 ];
 
+// เพิ่มฟังก์ชันป้องกันการซูม
+function preventZoom(e) {
+    var t2 = e.timeStamp;
+    var t1 = e.currentTarget.dataset.lastTouch || t2;
+    var dt = t2 - t1;
+    var fingers = e.touches.length;
+    e.currentTarget.dataset.lastTouch = t2;
+
+    if (!dt || dt > 500 || fingers > 1) return; // ไม่ทำอะไรถ้าใช้หลายนิ้วหรือระยะห่างเวลามากเกินไป
+
+    e.preventDefault();
+    e.target.click();
+}
+
+// เพิ่ม touch event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    const petals = document.querySelectorAll('.rose-petals > div');
+    petals.forEach(petal => {
+        petal.addEventListener('touchstart', preventZoom, false);
+    });
+});
+
 function fallPetal(petal) {
+    // ป้องกันการทำงานซ้ำถ้าเป็น touch event
+    if (petal.dataset.processing) return;
+    petal.dataset.processing = true;
+    
     // ตรวจสอบว่าเป็นดอกที่ร่วงอยู่แล้วหรือไม่
     const petalRect = petal.getBoundingClientRect();
     const containerRect = document.querySelector('.container').getBoundingClientRect();
@@ -65,6 +91,10 @@ function fallPetal(petal) {
     
     document.querySelector('.container').appendChild(fallingPetal);
     setTimeout(() => fallingPetal.remove(), 1500);
+
+    setTimeout(() => {
+        delete petal.dataset.processing;
+    }, 100);
 }
 
 // แก้ไขฟังก์ชัน createFloatingMessage ใน script.js

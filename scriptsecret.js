@@ -2,10 +2,10 @@ const noBtn = document.getElementById('noBtn');
 const yesBtn = document.getElementById('yesBtn');
 let noBtnText = 0;
 const texts = [
-    "ไม่ได้จริงๆ หรอครับ",
+    "ลองคิดใหม่อีกทีสิครับ",
     "ก็แค่ขอของขวัญเองง่ะ",
-    "นะๆ ขอเถอะ",
-    "พี่ใจร้ายจัง",
+    "ไม่ได้จริงๆ หรอครับ",
+    "ใจร้ายจัง",
     "ขอสักครั้งเถอะนะ",
     "ไม่ยอมแพ้ง่ายๆ หรอก",
     "ขออีกครั้งนะครับ",

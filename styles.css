@@ -12,15 +12,10 @@ html, body {
 	width: 100px;
 	height: 300px;
 	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	-moz-transform: scale(0.6);
-	-ms-transform: scale(0.6);
-	-webkit-transform: scale(0.6);
-	transform: scale(0.6);
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(0.6);
+	margin: 0;
   }
   .container div {
 	position: absolute;
@@ -889,4 +884,30 @@ html, body {
     100% {
         opacity: 0;
         transform: translateY(-200px) scale(1);
+}
+
+/* เพิ่ม media queries สำหรับอุปกรณ์มือถือ */
+@media screen and (max-width: 768px) {
+    .container {
+        transform: translate(-50%, -50%) scale(0.4);
+    }
+    
+    .title-container {
+        padding: 0 20px;
+    }
+    
+    .main-title {
+        font-size: 2em;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+    }
+}
+
+/* สำหรับอุปกรณ์ขนาดเล็กมาก */
+@media screen and (max-width: 375px) {
+    .container {
+        transform: translate(-50%, -50%) scale(0.35);
+    }
 }
