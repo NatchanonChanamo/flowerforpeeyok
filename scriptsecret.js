@@ -72,3 +72,56 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// สร้าง AudioContext และ buffer สำหรับเสียง
+let audioContext;
+let soundBuffer;
+
+// โหลดเสียงตั้งแต่เริ่มต้น
+async function initSound() {
+    try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const response = await fetch('bling.mp3');
+        const arrayBuffer = await response.arrayBuffer();
+        soundBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    } catch (error) {
+        console.log('Error loading sound:', error);
+    }
+}
+
+// เล่นเสียงด้วย AudioContext
+function playSound() {
+    if (audioContext && soundBuffer) {
+        const source = audioContext.createBufferSource();
+        source.buffer = soundBuffer;
+        source.connect(audioContext.destination);
+        source.start(0);
+    }
+}
+
+// เริ่มต้นโหลดเสียงเมื่อหน้าเว็บโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', initSound);
+
+// แก้ไขฟังก์ชัน fallPetal
+function fallPetal(petal) {
+    // ตรวจสอบตำแหน่งเหมือนเดิม
+    const petalRect = petal.getBoundingClientRect();
+    const containerRect = document.querySelector('.container').getBoundingClientRect();
+    const containerMiddleY = containerRect.top + (containerRect.height / 2);
+
+    if (petalRect.top > containerMiddleY) {
+        return;
+    }
+
+    // เล่นเสียงด้วยวิธีใหม่
+    playSound();
+    
+    // โค้ดส่วนที่เหลือเหมือนเดิม...
+}
+
+// เพิ่มการเริ่ม AudioContext เมื่อผู้ใช้มีปฏิสัมพันธ์ครั้งแรก
+document.addEventListener('touchstart', function() {
+    if (audioContext && audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+}, { once: true });
